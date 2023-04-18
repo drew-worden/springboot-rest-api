@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//STUDENT CONTROLLER
 @RestController
 public class StudentController {
     //GET ENDPOINT FOR RETURNING STATIC SINGLE JSON OBJECT
@@ -36,11 +37,13 @@ public class StudentController {
         return new Student(studentId, firstName, lastName);
     }
 
+    //GET ENDPOINT FOR QUERY PARAMETER
     @GetMapping("student/query")
     public Student studentQueryParameter(@RequestParam int id, @RequestParam String firstName, @RequestParam String lastName) {
         return new Student(id, firstName, lastName);
     }
 
+    //POST ENDPOINT FOR CREATING A NEW STUDENT
     @PostMapping("student/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Student createStudent(@RequestBody Student student) {
@@ -50,10 +53,18 @@ public class StudentController {
         return student;
     }
 
+    //PUT ENDPOINT FOR UPDATING A STUDENT
     @PutMapping("student/update/{id}")
     public Student updateStudent(@RequestBody Student student, @PathVariable int id) {
         System.out.println(student.getFirstName());
         System.out.println(student.getLastName());
         return student;
+    }
+
+    //DELETE ENDPOINT FOR DELETING A STUDENT
+    @DeleteMapping("student/delete/{id}")
+    public String deleteStudent(@PathVariable int id) {
+        System.out.println(id);
+        return "Student deleted successfully.";
     }
 }
