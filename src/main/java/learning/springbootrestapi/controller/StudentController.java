@@ -2,9 +2,9 @@ package learning.springbootrestapi.controller;
 
 import learning.springbootrestapi.bean.Student;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class StudentController {
         return student;
     }
 
-    //GET ENDPOING FOR RETURNING STATIC MULTIPLE JSON OBJECT
+    //GET ENDPOINT FOR RETURNING STATIC MULTIPLE JSON OBJECT
     @GetMapping("students")
     public List<Student> getStudents() {
         List<Student> students = new ArrayList<>();
@@ -29,5 +29,11 @@ public class StudentController {
         students.add(new Student(2, "John", "Smith"));
         students.add(new Student(3, "Jane", "Smith"));
         return students;
+    }
+
+    //GET ENDPOINT FOR PATH VARIABLE
+    @GetMapping("student/{id}/{firstName}/{lastName}")
+    public Student studentPathVariable(@PathVariable("id") int studentId, @PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+        return new Student(studentId, firstName, lastName);
     }
 }
