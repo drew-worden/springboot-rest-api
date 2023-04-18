@@ -2,6 +2,7 @@ package learning.springbootrestapi.controller;
 
 import learning.springbootrestapi.bean.Student;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -66,5 +67,14 @@ public class StudentController {
     public String deleteStudent(@PathVariable int id) {
         System.out.println(id);
         return "Student deleted successfully.";
+    }
+
+    //USING RESPONSE ENTITY CLASS TO CONFIGURE RESPONSE
+    @GetMapping("/student-with-entity")
+    public ResponseEntity<Student> getStudentUsingEntity() {
+        Student student = new Student(1, "Drew", "Worden");
+//        return new ResponseEntity<>(student, HttpStatus.OK);
+//        return new ResponseEntity.ok(student);
+        return ResponseEntity.ok().header("custom-header", "Drew").body(student);
     }
 }
